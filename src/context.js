@@ -22,11 +22,10 @@ export class Provider extends Component {
     dispatch: action => this.setState(state => reducer(state, action))
   };
   componentDidMount() {
+    const MM_KEY = "65cdc85bddd853749d85dff9d1155633";
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/chart.tracks.get?chart_name=top&page=1&page_size=10&country=us&f_has_lyrics=1&apikey=${
-          process.env.REACT_APP_MM_KEY
-        }`
+        `https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/chart.tracks.get?chart_name=top&page=1&page_size=10&country=us&f_has_lyrics=1&apikey=${MM_KEY}`
       )
       .then(res => {
         this.setState({ track_list: res.data.message.body.track_list });

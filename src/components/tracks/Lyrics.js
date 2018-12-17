@@ -11,18 +11,19 @@ class Lyrics extends Component {
     lyrics: {}
   };
   componentDidMount() {
+    const MM_KEY = "65cdc85bddd853749d85dff9d1155633";
     axios
       .get(
         `https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${
           this.props.match.params.id
-        }&apikey=${process.env.REACT_APP_MM_KEY}`
+        }&apikey=${MM_KEY}`
       )
       .then(res => {
         this.setState({ lyrics: res.data.message.body.lyrics });
         return axios.get(
           `https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.get?track_id=${
             this.props.match.params.id
-          }&apikey=${process.env.REACT_APP_MM_KEY}`
+          }&apikey=${MM_KEY}`
         );
       })
       .then(res => {
